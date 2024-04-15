@@ -3,7 +3,9 @@ node_modules
 dist
 *.lock
 .idea/
+shooter
 logs
 out
 *.iml
 *.log
+cache
