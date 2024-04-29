@@ -8,4 +8,9 @@ logs
 out
 *.iml
 *.log
+.DS_Store
+dist-ssr
 cache
+.cache
+.temp
+*.local

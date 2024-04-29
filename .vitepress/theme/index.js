@@ -1,10 +1,17 @@
+// https://vitepress.dev/guide/custom-theme
+import { h } from 'vue'
 import DefaultTheme from 'vitepress/theme'
-import MyComponent from './MyComponent.vue'
+import './style.css'
 
+/** @type {import('vitepress').Theme} */
 export default {
-  ...DefaultTheme,
-  enhanceApp({ app }) {
-    // 注册全局组件
-    app.component('MyComponent', MyComponent)
+  extends: DefaultTheme,
+  Layout: () => {
+    return h(DefaultTheme.Layout, null, {
+      // https://vitepress.dev/guide/extending-default-theme#layout-slots
+    })
+  },
+  enhanceApp({ app, router, siteData }) {
+    // ...
   }
 }

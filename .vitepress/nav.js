@@ -1,22 +1,17 @@
 
 module.exports = [
-    // {text: 'Guide', link: '/docs/guide/'},
-    {text: 'Blog ', link: '/docs/blog/'},
     {
-        text: 'Develop',
+        text: 'Guide',
         items: [
-          { text: '算法与设计模式 ', link: '/docs/develop/algorithm/' },
-          { text: 'Python', link: '/docs/develop/python/'},
-          { text: 'C/C++', link: '/docs/develop/c&c++/'},
-          { text: 'Java', link: '/docs/develop/java/' },
-          { text: 'NET', link: '/docs/develop/java/' },
-          { text: '数据科学', link: '/docs/develop/dataScience/' },
-          { text: 'DevOps', link: '/docs/develop/devops/' },
-          { text: 'Interview', link: '/docs/develop/interview/' },
+          { text: 'Python与人工智能', link: '/docs/guide/python/'},
+          { text: '互联网全栈工程师', link: '/docs/guide/java/' },
+          { text: '算法与设计模式 ', link: '/docs/guide/algorithm/' },
+          { text: '软件工程', link: '/docs/guide/devops/' },
+          { text: '面试指南', link: '/docs/guide/interview/' },
         ]
     },
-    {text: 'Media ', link: '/docs/media/'},
     {text: 'Quant', link: '/docs/quant/'},
+    {text: 'Media ', link: '/docs/media/'},
+    {text: 'Flow', link: '/docs/workflow/'},
     {text: 'Project', link: '/docs/project/'},
-    {text: 'Workflow', link: '/docs/workflow/'},
 ]

@@ -1,36 +1,28 @@
 ---
+# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
-  name: VitePress
-  text: Vite & Vue powered static site generator.
-  tagline: Lorem ipsum...
-  image:
-    src: /logo.svg
-    alt: VitePress
+  name: "知行合一"
+  text: "在线知识库"
+  tagline: 要向大目标走去，就得从小目标开始
+  image: 
+    src: /background.svg
   actions:
     - theme: brand
-      text: Get Started
-      link: /guide/what-is-vitepress
+      text: 指南
+      link: /docs/guide/
     - theme: alt
-      text: View on GitHub
-      link: https://github.com/vuejs/vitepress
+      text: 现金流
+      link: /docs/workflow/
 
 features:
-  - icon: ⚡️
-    title: Vite, The DX that can't be beat
-    details: Lorem ipsum...
-  - icon: 🖖
-    title: Power of Vue meets Markdown
-    details: Lorem ipsum...
-  - icon: 🛠️
-    title: Simple and minimal, always
-    details: Lorem ipsum...
+  - title: 工作
+    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+
+  - title: 副业
+    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 投资
+    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
-<style>
-    :root {
-      --vp-home-hero-name-color: transparent;
-      --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe, #41d1ff);
-    }
-</style>

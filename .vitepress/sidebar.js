@@ -1,7 +1,7 @@
 
 module.exports = {
     // 当用户在 `指南` 目录页面下将会展示这个侧边栏
-    '/docs/develop/python/': [
+    '/docs/guide/python/': [
       {
         text: 'Python',
         collapsed: true,
