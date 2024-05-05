@@ -1,7 +1,7 @@
 #通用禁用提交的文件
 node_modules
 dist
-*.lock
+
 .idea/
 shooter
 logs

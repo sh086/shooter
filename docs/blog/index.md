@@ -1,1 +1,7 @@
+---
+aside: false
+---
+
 # Blog
+
+
