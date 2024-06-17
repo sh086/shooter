@@ -70,11 +70,6 @@ export default defineConfig({
         },
       },
     },
-
-    // 配置markdown扩展
-    markdown: {
-      lineNumbers: true, // 开启代码块行号
-    },
     mermaid: {
       // refer https://mermaid.js.org/config/setup/modules/mermaidAPI.html#mermaidapi-configuration-defaults for options
     },
@@ -87,5 +82,11 @@ export default defineConfig({
       next: '下一页'
     }
 
-  }
+  },
+   // 配置markdown扩展
+   markdown: {
+    lineNumbers: true,
+     // 默认禁用图片懒加载
+     lazyLoading: true
+  },
 })

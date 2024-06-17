@@ -26,42 +26,31 @@ module.exports = {
       },
     ],
 
-    '/docs/home/': [
-      {
-        text: '生活随笔',
-        collapsed: false,
-        items: [
-          { text: '书与电影', link: '/docs/home/书与电影' },
-          { text: '旅游攻略', link: '/docs/home/旅游攻略' },
-        ]
-      },
-    ],
-
-  
-    '/docs/guide/python/course/': [
+    '/docs/guide/python/': [
       {
         text: 'Python',
         collapsed: false,
         items: [
-          { text: '简介', link: '/docs/guide/python/course/' },
-          { text: '快速开始', link: '/docs/guide/python/course/快速开始' },
-          { text: '常用语法概述', link: '/docs/guide/python/course/常用语法概述' },
+          { text: '简介', link: '/docs/guide/python/'},
+          { text: '快速开始', link: '/docs/guide/python/startup/'},
+          { text: '面试宝典', link: '/docs/guide/python/startup/面试宝典.md' },
         ]
       },
       {
-        text: '实战',
+        text: '应用',
         collapsed: false,
         items: [
-          { text: '课后练习', link: '/docs/guide/python/course/课后练习' },
-          { text: '猜数字游戏', link: '/docs/guide/python/course/猜数字游戏' },
-          { text: '植物大战僵尸', link: '/docs/guide/python/course/植物大战僵尸' },
+          { text: '爬虫与数据分析', link: '/docs/guide/python/data/' },
+          { text: 'Web开发', link: '/docs/guide/python/web/' },
+          { text: '自动化办公', link: '/docs/guide/python/work/' },
+          { text: '人工智能即未来', link: '/docs/guide/python/smart/' },
         ]
       },
       {
         text: '拓展',
-        collapsed: false,
+        collapsed: true,
         items: [
-          { text: '流畅的Python', link: '/docs/guide/python/course/流畅的Python' },
+          { text: '游戏开发', link: '/docs/guide/python/game/' },
         ]
       },
     ],
