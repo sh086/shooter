@@ -1,0 +1,23 @@
+{
+    "insecure-registries":[
+        "mirrors.yanwentech.com:8080",
+        "mirrors.yanwentech.com:8000",
+        "mirrors.yanwentech.com:8088",
+        "mirrors.yanwentech.com:8008",
+        "cr.registry.res.yanwentech.cn"
+    ],
+    "registry-mirrors":[
+        "https://docker.mirrors.ustc.edu.cn",
+        "http://hub-mirror.c.163.com",
+        "https://registry.docker-cn.com",
+        "https://docker.mirrors.ustc.edu.cn"
+    ],
+    "log-driver": "json-file",
+    "log-level": "warn",
+    "log-opts": {
+        "max-size": "100m",
+        "max-file": "3"
+        },
+    "live-restore": true,
+    "exec-opts": ["native.cgroupdriver=systemd"]
+}

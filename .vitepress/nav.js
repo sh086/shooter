@@ -1,6 +1,6 @@
 
 module.exports = [
-  {text: 'Home ', link: '/docs/home/'},
+  {text: 'Home ', link: '/'},
   //{text: 'Blog', link: '/docs/blog/'},
   //{text: 'Guide', link: '/docs/guide/'},
   {text: 'Guide', items: [

@@ -31,9 +31,10 @@ module.exports = {
         text: 'Python',
         collapsed: false,
         items: [
-          { text: '简介', link: '/docs/guide/python/'},
-          { text: '快速开始', link: '/docs/guide/python/startup/'},
-          { text: '面试宝典', link: '/docs/guide/python/startup/面试宝典.md' },
+          { text: '入门', link: ''},
+          { text: '指南', link: '/docs/guide/python/'},
+          { text: '快速开始', link: ''},
+          { text: '面试宝典', link: '/docs/guide/python/interview.md' },
         ]
       },
       {
