@@ -26,32 +26,31 @@ module.exports = {
       },
     ],
 
-    '/docs/guide/python/': [
+    '/docs/develop/python/': [
       {
         text: 'Python',
         collapsed: false,
         items: [
-          { text: '入门', link: ''},
-          { text: '指南', link: '/docs/guide/python/'},
-          { text: '快速开始', link: ''},
-          { text: '面试宝典', link: '/docs/guide/python/interview.md' },
+          { text: '指南', link: '/docs/develop/python/guide/'},
+          { text: '快速开始', link: '/docs/develop/python/startup/'},
+          { text: '面试宝典', link: '/docs/develop/python/interview/'},
         ]
       },
       {
         text: '应用',
         collapsed: false,
         items: [
-          { text: '爬虫与数据分析', link: '/docs/guide/python/data/' },
-          { text: 'Web开发', link: '/docs/guide/python/web/' },
-          { text: '自动化办公', link: '/docs/guide/python/work/' },
-          { text: '人工智能即未来', link: '/docs/guide/python/smart/' },
+          { text: '爬虫与数据分析', link: '/docs/develop/python/data/'},
+          { text: 'Web开发', link: '/docs/develop/python/web/'},
+          { text: '自动化办公', link: '/docs/develop/python/work/'},
+          { text: '人工智能即未来', link: '/docs/develop/python/smart/'},
         ]
       },
       {
         text: '拓展',
         collapsed: true,
         items: [
-          { text: '游戏开发', link: '/docs/guide/python/game/' },
+          { text: '游戏开发', link: '/docs/develop/python/game/'},
         ]
       },
     ],
