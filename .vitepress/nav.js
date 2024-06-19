@@ -3,7 +3,7 @@ module.exports = [
   {text: 'Home ', link: '/'},
   //{text: 'Blog', link: '/docs/blog/'},
   //{text: 'Guide', link: '/docs/guide/'},
-  {text: 'Guide', items: [
+  {text: 'Develop', items: [
     { text: 'Python与人工智能', link: '/docs/develop/python/'},
     { text: 'ChatGPT应用', link: '/docs/develop/chatgpt/'},
     { text: 'Java从业指南', link: '/docs/develop/java/'},
