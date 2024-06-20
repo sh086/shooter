@@ -4,15 +4,17 @@
 
 ### 业务需求
 
-​    　爬取[雪球沪A成交额](https://xueqiu.com/hq/detail?order=desc&orderBy=amount&type=sha&market=CN&first_name=0&second_name=3)的股票代码、股票名称、当前价、成交额等信息到Excel表格中，并将数据在图表中展示。
+​    　爬取[雪球沪A成交额](https://xueqiu.com/hq/detail?order=desc&orderBy=amount&type=sha&market=CN&first_name=0&second_name=3)的股票代码、股票名称、当前价、成交额等信息到CVS表格中，并将数据在图表中展示。
 
 ![image-20240616153027510](.\images\爬取雪球沪A成交额_01.png)
 
-### 总体设计
+### 抓包分析
 
-​    　 对网页进行分析可得，数据可由[接口](https://stock.xueqiu.com/v5/stock/screener/quote/list.json?page=1&size=30&order=desc&order_by=amount&market=CN&type=sha)通过`GET`方式获取，通过传入不同的`page参数`即可获取不同页数的数据。数据导出完成后，可以通过`jupyter`展示数据图表。
+​    　 对网页进行分析可得，数据可由此[接口](https://stock.xueqiu.com/v5/stock/screener/quote/list.json?page=1&size=30&order=desc&order_by=amount&market=CN&type=sha)通过`GET`方式获取，然后传入不同的`page参数`即可获取不同页数的数据。数据导出完成后，可以通过`jupyter`展示数据图表。
 
-## 收集Excel数据
+![image-20240619231557401](.\images\爬取雪球沪A成交额_00.png)
+
+## CVS表格
 
 ### 准备
 
@@ -53,10 +55,10 @@ csv_writer = csv.DictWriter(f, fieldnames=[
 csv_writer.writeheader()
 
 # get_count : 已拉取的数据量
-# data_count: 从接口中获取的总数据量
-# page: 当前页数
 get_count = 0
+# data_count: 从接口中获取的总数据量，默认是1 后续会取接口返回的count更新
 data_count = 1
+# page: 当前页数
 page = 1
 while get_count < data_count:
     print(f"正在爬取第{page}页数据...")
@@ -75,8 +77,9 @@ while get_count < data_count:
         print(f"爬取第{page}页数据时失败:", response)
         continue
 
-    # 解析返回数据
+    # 更新总数据量
     data_count = response.json()['data']['count']
+    # 解析返回数据
     data_list = response.json()['data']['list']
     if data_list is []:
         break
@@ -134,16 +137,18 @@ pip install pandas
 pip install pyecharts
 ```
 
-（2）安装JupyterLab
+（2）安装`Jupyter Lab`，参考[这里](https://jupyter.org/install)
 
 ```shell
 # 安装JupyterLab
 pip install jupyterlab
 # 启动
-jupyterlab
+jupyter lab
 ```
 
 ### 编码
+
+​    　 接着，使用`pandas`处理数据 + `pyecharts`展示数据。注意，`pyecharts`在`jupyterlab`的用法示例可参考[这里](https://github.com/pyecharts/pyecharts)。
 
 ```python{2,3,27}
 # 高亮的2、3、27行代码是为了使得c.render_notebook()生效
@@ -153,6 +158,7 @@ CurrentConfig.NOTEBOOK_TYPE = NotebookType.JUPYTER_LAB
 # 导入股票名称+成交量
 import pandas as pd
 df = pd.read_csv('雪球股票数据20240616102057.csv')
+
 from pyecharts.charts import Bar
 from pyecharts import options as opts
 x = list(df['股票名称'].values)
