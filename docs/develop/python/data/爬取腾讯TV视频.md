@@ -12,7 +12,7 @@
 
 ![image-20240621003109237](.\images\爬取腾讯TV视频_02.png)
 
-​	　此外，再通过`ts片段`的请求URL即可获取对应的请求前缀，最后，循环遍历`vinfo`里面的`m3u8地址`并拼接该请求前缀并，即可下载该影片。
+​	　此外，再通过`ts片段`的请求URL即可获取对应的请求前缀，最后，循环遍历`vinfo`里面的`m3u8地址`并拼接该请求前缀，即可下载该影片。
 
 ![image-20240621003318667](.\images\爬取腾讯TV视频_01.png)
 
@@ -84,6 +84,9 @@ ts_list = re.sub(r'#http.*', '', ts_list).split()
 # 拼接真实的链接地址
 for ts in tqdm(ts_list):
     ts_url = ts_prefix_url + ts
+    # response.json 获取json数据
+    # response.text 获取文本数据，返回字符串类型 多用于网页源代码
+    # response.content 获取二进制数据，多用于保存图片、音视频或者文件数据
     video_content = requests.get(ts_url).content
     with open('玫瑰的爱情.mp4', mode='ab') as f:
         f.write(video_content)
