@@ -6,25 +6,125 @@
 
 ### 抓包分析
 
-![image-20240623170615332](.\images\image-20240623170615332.png)
+（1） `w_rid`参数逆向
 
-![image-20240623165020286](.\images\image-20240623165020286.png)
+​	　在获取视频评论等信息时，`w_rid`都是必传参数，在包含评论的视频页面中使用F12进行抓包分析，结果如下：
+
+![image-20240623170615332](.\images\bilibili_01.png)
+
+​	　通过上述过程，可得 `w_rid`加密逻辑如下：
+
+```
+① ee 列表中存储了参数的内容
+② 通过join把en列表合并成一个字符串L
+③ md5(L+固定字符串z) 就是w_rid
+```
+
+
 
 ## 视频
 
 ### 下载
 
-B站视频画面和视频声音是分开的
+​	　B站视频画面和视频声音是分开的，所以需要提前下载[ffmpeg](https://www.ffmpeg.org/download.html#build-mac)用于视频合并，安装参考[这里](https://blog.csdn.net/qq_35164554/article/details/124866110)，下载或者合并完成的MP4文件可以在[这里](https://33tool.com/vplayer/)播放。
+
+```python
+import re
+import requests
+# 导入json模块
+import json
+# 导入进程模块
+import subprocess
+
+# 设置请求地址和请求头
+url = "https://www.bilibili.com/video/BV1Vn4y1R7Wa/?spm_id_from=333.999.0.0&vd_source=f87f39b1af12eeb6301c7d9944f97ec9"
+headers = {
+    # Cookie 用户信息，用于检测是否登录账号, 不填只能采集游客可见的低码率视频
+    "Cookie": "buvid3=E689D31C-EBE7-0D4D-F07C-0FD19B512FC184128infoc; b_nut=1714830384; _uuid=24564A210-F44E-5615-101C9-35F2412C8D5B30414infoc; rpdid=|(u)~m~lRlR|0J'u~uR)JuYJ|; DedeUserID=393064787; DedeUserID__ckMd5=7da7c00dbacf7351; enable_web_push=DISABLE; header_theme_version=CLOSE; buvid_fp_plain=undefined; buvid4=77EF1CDA-1F19-25A6-D9CE-AE8E6F4C589884128-024050413-YRhbWcuExuOyrC%2FRS1ie5g%3D%3D; CURRENT_BLACKGAP=0; CURRENT_FNVAL=4048; home_feed_column=5; fingerprint=c4aba8e230d8c85eb5b332b68407a873; SESSDATA=31e4a46e%2C1734621838%2C0680d%2A62CjA5gNJx6_SFUXVH693qEjWCJVF20OGNhoJacoum3wGK9vCQWhrSbrLybkrCZ9gjCYUSVmxlYmdwYnFyZHNvU1F5QXNOT0JQNXlCSmNCMFNVU09GdHVDNE1xOGdzTG5ZaFFuZ2M1azJ0dWZVdHRLcHRrN2dEemdFMjdJUjZiUlVrUHdtajZacTJnIIEC; bili_jct=5bd71cb03eae07548266197ef035aa50; sid=6i5o8z4i; VIP_DEFINITION_GUIDE=1; buvid_fp=c4aba8e230d8c85eb5b332b68407a873; LIVE_BUVID=AUTO4217191050884049; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTkzNjQzMTUsImlhdCI6MTcxOTEwNTA1NSwicGx0IjotMX0.Go5urrrucXNDkh5t4Qzdy9V6BAdzHDUmhfWV2EKlheY; bili_ticket_expires=1719364255; PVID=18; browser_resolution=2588-1638; bmg_af_switch=1; bmg_src_def_domain=i2.hdslb.com; bsource=search_google; bp_t_offset_393064787=946588883410223104; b_lsid=CC9A7BA1_1904A69536C",
+    # 防盗链 告诉服务器请求链接是从哪里跳转过来的
+    "Referer": "https://www.bilibili.com/video/BV1VS411A7UT/?spm_id_from=333.999.0.0&vd_source=f87f39b1af12eeb6301c7d9944f97ec9",
+    # 用户代码 表示浏览器/设备 基本身份信息
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+}
+# 下载数据
+response = requests.get(url=url, headers=headers)
+
+# 解析数据
+# 音视频信息
+info_list = re.findall('<script>window.__playinfo__=(.*?)</script>', response.text)
+json_obj = json.loads(info_list[0])
+# 音频链接 0就是最高清的 -1是最低的
+audio_url = json_obj['data']['dash']['audio'][0]['baseUrl']
+# 视频链接
+video_url = json_obj['data']['dash']['video'][0]['baseUrl']
+# 视频标题
+video_title = re.findall(' title="(.*?)" class="video-title', response.text)[0]
+# 去除标题中的特殊字符，只保留中午、字母和数字
+video_title = re.sub('[^0-9a-zA-Z\u4e00-\u9fa5]+', '', str(video_title))
+#print(video_title, audio_url, video_url)
+
+# 下载音视频
+with open('临时文件.mp3', 'wb') as audio:
+    audio.write(requests.get(url=audio_url, headers=headers).content)
+with open('临时文件.mp4', 'wb') as video:
+    # 视频下载必须加上Referer防盗链
+    video.write(requests.get(url=video_url, headers=headers).content)
+
+# 音视频合并
+cmd = f"ffmpeg -i 临时文件.mp3 -i 临时文件.mp4  -acodec copy -vcodec copy {video_title}_output.mp4"
+subprocess.run(cmd)
+print(f"{video_title}_output.mp4 已经下载完毕")
+```
+
+
+
+### 批量
+
+​	　经上面下载B站视频分析，批量下载只需更换 `B站视频ID` 即可。任选一个UP主页，如[这里](https://space.bilibili.com/11130880/video)，通过`播放全部`按钮，即可获取全部的视频ID。
+
+![image-20240624233529731](.\images\bilibili_03.png)
+
+（1）安装第三方模块
+
+```shell
+# 安装自动化模块
+pip install DrissionPage
+```
+
+（1）代码实现
+
+```python
+# 导入自动化模块
+from DrissionPage import ChromiumPage
+
+if __name__ == '__main__':
+    driver = ChromiumPage()
+    # 监听前缀为这个的接口返回
+    driver.listen.start('https://api.bilibili.com/x/space/wbi/arc/search')
+    # 访问UP主空间
+    driver.get("https://space.bilibili.com/11130880/video")
+    # 等待监听结果
+    resp = driver.listen.wait()
+    # 获取响应数据
+    json_data = resp.response.body
+    # 解析视频ID
+    for index in json_data['data']['list']['vlist']:
+        bv = index['视频ID']
+        print(f'正在下载{bv}')
+        # 传入bv下载并保存视频
+        # 这里就是上一小节的代码，只需在url替换视频ID即可
+        getVideoInfo(bv)
+```
 
 
 
 ### 弹幕
 
-​	　首先，在看B站视频时，在`bilibili.com`域名前面加个`i`字母，即可访问爱哔哩工具站，该网页中由解析好的弹幕地址。
+​	　首先，在看B站视频]时，在`bilibili.com`域名前面加个`i`字母，即可访问[爱哔哩工具站](https://www.ibilibili.com/video/BV1bm421N7ru/?spm_id_from=333.788&vd_source=f87f39b1af12eeb6301c7d9944f97ec9)，该网页中由解析好的弹幕地址。
 
-![image-20240622180632657](.\images\image-20240622180632657.png)
+![image-20240622180632657](.\images\bilibili_02.png)
 
-​	　代码实现：
+​	　直接通过`GET`请求该弹幕地址即可获取视频完整的弹幕信息。此外，也可以通过页面进行批量采集，这里不再赘述。
 
 ```python
 import requests
@@ -34,7 +134,8 @@ import re
 # 此处的oid就是cid,也可在网页中获取
 url = 'https://api.bilibili.com/x/v1/dm/list.so?oid=1562982127'
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'}
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+}
 
 response = requests.get(url=url, headers=headers)
 response.encoding = 'utf-8'
