@@ -14,7 +14,7 @@
 
 ![image-20240619231557401](.\images\爬取雪球沪A成交额_00.png)
 
-## CVS表格
+## 表格
 
 ### 准备
 
@@ -124,11 +124,34 @@ f.close()
 print("爬取数据完毕！")
 ```
 
+
+
+### Excel表格
+
+```python
+# 拓展：保存表格文件的方式
+# csv -> csv模块
+# Excel -> pandas模块
+
+import pandas
+
+content_list = []
+
+.....
+for data in data_list:
+    .....
+     # 把字典添加到空列表中
+        content_list.append(dit)
+
+# 保存到Excel
+pandas.DataFrame(content_list).to_excel('股票.xlsx',index=False)
+```
+
+
+
 ## 数据图表
 
-### 准备
-
-（1）安装第三方模块
+​    　首先，安装第三方模块。
 
 ```shell
 # 用于处理数据
@@ -137,7 +160,40 @@ pip install pandas
 pip install pyecharts
 ```
 
-（2）安装`Jupyter Lab`，参考[这里](https://jupyter.org/install)
+### Html
+
+​    　运行后，即可得到`data.html`，在浏览器中打开即可获得数据图表。
+
+```python
+# 导入股票名称+成交量
+import pandas as pd
+from pyecharts.charts import Bar
+from pyecharts import options as opts
+
+df = pd.read_csv('雪球股票数据20240624235619.csv')
+
+x = list(df['股票名称'].values)
+y = list(map(float, df['成交量'].values))
+
+c = (
+    Bar()
+    .add_xaxis(x[:10])
+    .add_yaxis('股票成交量情况', y[:10])
+    .set_global_opts(
+        title_opts=opts.TitleOpts(title='成交量图表'),
+        datazoom_opts=opts.DataZoomOpts()
+    )
+    # 将结果生成到data.html
+    .render('data.html')
+)
+
+```
+
+
+
+### Jupyter Lab
+
+​    　首先，安装`Jupyter Lab`，参考[这里](https://jupyter.org/install)。
 
 ```shell
 # 安装JupyterLab
@@ -146,9 +202,7 @@ pip install jupyterlab
 jupyter lab
 ```
 
-### 编码
-
-​    　 接着，使用`pandas`处理数据 + `pyecharts`展示数据。注意，`pyecharts`在`jupyterlab`的用法示例可参考[这里](https://github.com/pyecharts/pyecharts)。
+​    　启动后，在`Jupyter Lab`上编写如下代码，注意，`pyecharts`在`jupyterlab`的用法示例可参考[这里](https://github.com/pyecharts/pyecharts)。
 
 ```python{2,3,27}
 # 高亮的2、3、27行代码是为了使得c.render_notebook()生效
@@ -182,6 +236,6 @@ c.load_javascript()
 c.render_notebook()
 ```
 
-### 测试
+​    　运行结果如下：
 
 ![image-20240616155321887](.\images\爬取雪球沪A成交额_02.png)
