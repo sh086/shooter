@@ -1,35 +1,27 @@
-# 哔哩哔哩 (゜-゜)つロ
-
-## 概述
-
-### 业务需求
-
-### 抓包分析
-
-（1） `w_rid`参数逆向
-
-​	　在获取视频评论等信息时，`w_rid`都是必传参数，在包含评论的视频页面中使用F12进行抓包分析，结果如下：
-
-![image-20240623170615332](.\images\bilibili_01.png)
-
-​	　通过上述过程，可得 `w_rid`加密逻辑如下：
-
-```
-① ee 列表中存储了参数的内容
-② 通过join把en列表合并成一个字符串L
-③ md5(L+固定字符串z) 就是w_rid
-```
-
-
+# 爬取B站视频、评论和弹幕
 
 ## 视频
 
 ### 下载
 
-​	　B站视频画面和视频声音是分开的，所以需要提前下载[ffmpeg](https://www.ffmpeg.org/download.html#build-mac)用于视频合并，安装参考[这里](https://blog.csdn.net/qq_35164554/article/details/124866110)，下载或者合并完成的MP4文件可以在[这里](https://33tool.com/vplayer/)播放。
+（1）抓包分析
+
+​	　首先，打开[B站视频网页](https://www.bilibili.com/video/BV1Vn4y1R7Wa/?spm_id_from=333.999.0.0&vd_source=f87f39b1af12eeb6301c7d9944f97ec9)，进入`F12`，然后再次刷新网页，接着，搜索`m4s`媒体文件对应的请求接口地址。
+
+![image-20240625212512604](.\images\image-20240625212512604.png)
+
+​	　以`m4s`片段请求接口的开头，再次搜索，即可定位到资源下载地址列表。列表中第一个就是最高清的视频链接。
+
+![image-20240625212701162](.\images\image-20240625212701162.png)
+
+​	　注意，B站视频画面和视频声音是分开的，所以需要提前下载[ffmpeg](https://www.ffmpeg.org/download.html#build-mac)用于将音频和视频进行合并。`ffmpeg`安装参考[这里](https://blog.csdn.net/qq_35164554/article/details/124866110)，下载或者合并完成的MP4文件可以在[这里](https://33tool.com/vplayer/)播放。
+
+（2）代码实现
 
 ```python
+# 导入正则模块
 import re
+# 导入HTTP模块
 import requests
 # 导入json模块
 import json
@@ -78,20 +70,26 @@ print(f"{video_title}_output.mp4 已经下载完毕")
 
 
 
-### 批量
+### 视频合集
 
-​	　经上面下载B站视频分析，批量下载只需更换 `B站视频ID` 即可。任选一个UP主页，如[这里](https://space.bilibili.com/11130880/video)，通过`播放全部`按钮，即可获取全部的视频ID。
+
+
+### 个人空间
+
+（1）抓包分析
+
+​	　经上面下载B站视频下载分析，批量下载只需更换 `B站视频ID` 即可。任选一个UP主页，如[这里](https://space.bilibili.com/11130880/video)，通过`播放全部`按钮，即可获取全部的视频ID。
 
 ![image-20240624233529731](.\images\bilibili_03.png)
 
-（1）安装第三方模块
+（2）安装第三方模块
 
 ```shell
 # 安装自动化模块
 pip install DrissionPage
 ```
 
-（1）代码实现
+（3）代码实现
 
 ```python
 # 导入自动化模块
@@ -118,9 +116,39 @@ if __name__ == '__main__':
 
 
 
+### 番剧
+
+​	　以[猫和老鼠](https://www.bilibili.com/bangumi/play/ep249469?from_spmid=666.25.episode.0)这个番剧为例，首先搜索`m4s`媒体文件对应的请求接口地址，然后，以`m4s`片段请求接口的开头，再次搜索，即可定位到资源下载地址列表。
+
+​	　注意，第1、2、3集的播放地址都是在页面上的，从第4集开始才可以批量从接口获取。
+
+```python
+https://api.bilibili.com/pgc/player/web/v2/playurl?support_multi_audio=true&qn=80&fnver=0&fnval=4048&fourk=1&gaia_source=&from_client=BROWSER&is_main_page=true&need_fragment=true&season_id=357&isGaiaAvoided=false&ep_id=249469&session=c734f5d2484897be4dec398280995687&voice_balance=1&drm_tech_type=2
+
+
+https://api.bilibili.com/pgc/player/web/v2/playurl?support_multi_audio=true&qn=80&fnver=0&fnval=4048&fourk=1&gaia_source=&from_client=BROWSER&is_main_page=true&need_fragment=true&season_id=357&isGaiaAvoided=false&ep_id=249470&session=94c28dabc6b5e9b3467c5da125e6e2d7&voice_balance=1&drm_tech_type=2
+
+
+
+```
+
+
+
+
+
+![image-20240626232702528](.\images\image-20240626232702528.png)
+
+
+
+
+
+![image-20240626233611938](.\images\image-20240626233611938.png)
+
+
+
 ### 弹幕
 
-​	　首先，在看B站视频]时，在`bilibili.com`域名前面加个`i`字母，即可访问[爱哔哩工具站](https://www.ibilibili.com/video/BV1bm421N7ru/?spm_id_from=333.788&vd_source=f87f39b1af12eeb6301c7d9944f97ec9)，该网页中由解析好的弹幕地址。
+​	　在看B站视频时，在`bilibili.com`域名前面加个`i`字母，即可访问[爱哔哩工具站](https://www.ibilibili.com/video/BV1bm421N7ru/?spm_id_from=333.788&vd_source=f87f39b1af12eeb6301c7d9944f97ec9)，该网页中由解析好的弹幕地址。
 
 ![image-20240622180632657](.\images\bilibili_02.png)
 
@@ -149,6 +177,48 @@ with open('弹幕.txt', 'w', encoding='utf-8') as fw:
 ```
 
 ### 评论
+
+（1）抓包分析
+
+​	　打开[B站视频网页](https://www.bilibili.com/video/BV1Vn4y1R7Wa/?spm_id_from=333.999.0.0&vd_source=f87f39b1af12eeb6301c7d9944f97ec9)，进入`F12`，然后再次刷新网页，根据**评论内容**进行搜索，即可得到获取评论第一页的请求接口以及参数。
+
+![image-20240625233137593](.\images\image-20240625233137593.png)
+
+​	　接着，向下拉动以获取第二页评论，并按上面的方法获取评论第二页的请求接口以及参数。通过观察可分为`baseUrl`、固定参数和可变参数。
+
+```
+# 评论第一页的请求接口以及参数
+https://api.bilibili.com/x/v2/reply/wbi/main?oid=1055633354&type=1&mode=3&pagination_str=%7B%22offset%22:%22%22%7D&plat=1&seek_rpid=&web_location=1315875&w_rid=5d242111f65086efb98df330463aa599&wts=1719329085
+# 评论第二页的请求接口以及参数
+https://api.bilibili.com/x/v2/reply/wbi/main?oid=1055633354&type=1&mode=3&pagination_str=%7B%22offset%22:%22%7B%5C%22type%5C%22:1,%5C%22direction%5C%22:1,%5C%22session_id%5C%22:%5C%221760592981052008%5C%22,%5C%22data%5C%22:%7B%7D%7D%22%7D&plat=1&web_location=1315875&w_rid=4ae34290e66f00e26b289b1a208b60bc&wts=1719329573
+
+# baseUrl
+https://api.bilibili.com/x/v2/reply/wbi/main
+# 固定参数
+oid=1055633354&type=1&mode=3&plat=1&seek_rpid=&web_location=1315875
+# 可变参数
+pagination_str: 存储的是下一页信息
+w_rid：MD5加密
+wts：时间戳
+```
+
+​	　经观察可知，`pagination_str`是由`URL编码`的，第一页传入的是`{"offset":""}`，第二页以及下一页由接口的`next_offset`返回。
+
+![image-20240626000334652](.\images\image-20240626000334652.png)
+
+​	　最后，全局搜索`w_rid`字样，并在可能的地方打上断点，刷新网页，即可获取到`w_rid`如何加密的代码。
+
+![image-20240623170615332](.\images\bilibili_01.png)
+
+​	　分析此段代码，可得 `w_rid`加密逻辑如下：
+
+```
+① ee 列表中存储了参数的内容
+② 通过join把en列表合并成一个字符串L
+③ md5(L+固定字符串z) 就是w_rid
+```
+
+（3）代码实现
 
 ```python
 # 导入csv模块
@@ -249,8 +319,9 @@ while True:
         }
         csv_writer.writerow(dit)
 
+    # 设置下一页的offset
     offset = response.json()['data']['cursor']['pagination_reply']['next_offset']
-    # 保证offset打印的是如下格式的字符
+    # 保证offset打印的是如下格式的字符，否则w_rid会加密失败的
     # "{\"type\":1,\"direction\":1,\"session_id\":\"1760406203972306\",\"data\":{}}"
     offset = str(offset).replace('"', '\\\"')
 # 关闭文件
@@ -259,13 +330,19 @@ f.close()
 
 
 
-### 合集
-
 ## 直播
 
 ### 下载
 
 ### 弹幕
+
+（1）抓包分析
+
+​	　打开B站直播，进入`F12`，然后再次刷新网页，接着搜索已发送的弹幕，即可获得弹幕链接地址。
+
+![image-20240626001552513](.\images\image-20240626001552513.png)
+
+（2）代码实现
 
 ```python
 import requests
@@ -290,12 +367,13 @@ while True:
     # 解析数据
     for index in data_list:
         barrage = index['text']
+        # 接口获取的是最新的10条弹幕，所以已打印的无需重复打印
         if barrage not in barrage_list:
             barrage_list.append(barrage)
             print(barrage)
             if len(barrage_list) > 10:
                 barrage_list = barrage_list[1:11]
-
+    # 间隔1s获取一次
     time.sleep(1)
 ```
 
