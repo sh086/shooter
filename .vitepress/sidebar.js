@@ -14,7 +14,7 @@ module.exports = {
         text: '2024年笔记',
         collapsed: false,
         items: [
-          { text: '使用Arthas线上DEBUG', link: '/docs/blog//2024/使用Arthas线上DEBUG' },
+          { text: '使用Arthas线上DEBUG', link: '/docs/blog/2024/使用Arthas线上DEBUG' },
         ]
       },
       {
@@ -52,6 +52,31 @@ module.exports = {
         collapsed: true,
         items: [
           { text: '游戏开发', link: '/docs/develop/python/game/'},
+        ]
+      },
+    ],
+
+    '/docs/media/stable-diffusion/': [
+      {
+        text: 'Stable Diffusion',
+        collapsed: false,
+        items: [
+          { text: '简介', link: '/docs/media/stable-diffusion/'},
+          { text: '快速开始', link: '/docs/media/stable-diffusion/quickstart.md'},
+        ]
+      },
+      {
+        text: '功能',
+        collapsed: false,
+        items: [
+          { text: '文生图', link: '/docs/media/stable-diffusion/txt2img.md'},
+          { text: '图生图', link: '/docs/media/stable-diffusion/img2img.md'},
+        ]
+      },
+      {
+        text: '最佳实践',
+        collapsed: true,
+        items: [
         ]
       },
     ],
