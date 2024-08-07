@@ -1,16 +1,18 @@
 
 module.exports = [
-  {text: 'Home ', link: '/'},
+  {text: '主页 ', link: '/'},
   //{text: 'Blog', link: '/docs/blog/'},
   //{text: 'Guide', link: '/docs/guide/'},
-  {text: 'Develop', items: [
-    { text: 'GPT大模型应用', link: '/docs/develop/chatgpt/'},
-    { text: 'Python与自动化', link: '/docs/develop/python/'},
-    { text: 'Java从业指南', link: '/docs/develop/java/'},
-    { text: 'DevOps项目管理', link: '/docs/develop/devops/'},
-    { text: '前端全栈开发', link: '/docs/develop/webapp/'},
-  ]},
-  {text: 'Media', link: '/docs/media/'},
-  {text: 'Quant', link: '/docs/quant/'},
-  {text: 'Work', link: '/docs/workflow/'},
+  {text: '指南', link: '/docs/guide/'},
+  {text: '量化', link: '/docs/quant/'},
+  // {text: 'Develop', items: [
+  //   { text: 'GPT大模型应用', link: '/docs/develop/chatgpt/'},
+  //   { text: 'Python与自动化', link: '/docs/develop/python/'},
+  //   { text: '互联网全栈开发', link: '/docs/develop/webapp/'},
+  //   { text: 'DevOps项目管理', link: '/docs/develop/devops/'},
+  //   { text: '大数据与云计算', link: '/docs/develop/data/'},
+  // ]},
+  {text: '工作流', link: '/docs/workflow/'},
+  {text: '创业', link: '/docs/project/'},
+  {text: '自媒体', link: '/docs/media/'},
 ]
