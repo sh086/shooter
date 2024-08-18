@@ -4,7 +4,6 @@ module.exports = [
   //{text: 'Blog', link: '/docs/blog/'},
   //{text: 'Guide', link: '/docs/guide/'},
   {text: '指南', link: '/docs/guide/'},
-  {text: '量化', link: '/docs/quant/'},
   // {text: 'Develop', items: [
   //   { text: 'GPT大模型应用', link: '/docs/develop/chatgpt/'},
   //   { text: 'Python与自动化', link: '/docs/develop/python/'},
@@ -13,6 +12,7 @@ module.exports = [
   //   { text: '大数据与云计算', link: '/docs/develop/data/'},
   // ]},
   {text: '工作流', link: '/docs/workflow/'},
+  {text: '量化', link: '/docs/quant/'},
   {text: '创业', link: '/docs/project/'},
   {text: '自媒体', link: '/docs/media/'},
 ]
