@@ -14,5 +14,5 @@ module.exports = [
   {text: '工作流', link: '/docs/workflow/'},
   {text: '量化', link: '/docs/quant/'},
   {text: '创业', link: '/docs/project/'},
-  {text: '自媒体', link: '/docs/media/'},
+  //{text: '自媒体', link: '/docs/media/'},
 ]
