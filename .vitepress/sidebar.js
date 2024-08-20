@@ -26,36 +26,6 @@ module.exports = {
       },
     ],
 
-    '/docs/develop/python/': [
-      {
-        text: 'Python',
-        collapsed: false,
-        items: [
-          { text: '简介', link: '/docs/develop/python/'},
-          { text: '指南', link: '/docs/develop/python/guide/'},
-          { text: '最佳实践', link: '/docs/develop/python/startup/'},
-          { text: '面试宝典', link: '/docs/develop/python/interview/'},
-        ]
-      },
-      {
-        text: '应用',
-        collapsed: false,
-        items: [
-          { text: '爬虫与数据分析', link: '/docs/develop/python/data/'},
-          { text: 'Web开发', link: '/docs/develop/python/web/'},
-          { text: '自动化办公', link: '/docs/develop/python/work/'},
-          { text: '人工智能即未来', link: '/docs/develop/python/smart/'},
-        ]
-      },
-      {
-        text: '拓展',
-        collapsed: true,
-        items: [
-          { text: '游戏开发', link: '/docs/develop/python/game/'},
-        ]
-      },
-    ],
-
     '/docs/media/stable-diffusion/': [
       {
         text: 'Stable Diffusion',
