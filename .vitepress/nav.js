@@ -6,8 +6,8 @@ module.exports = [
   //{text: '指南', link: '/docs/guide/'},
   {text: '指南', items: [
     { text: '互联网全栈工程师', link: '/docs/guide/'},
-    { text: 'GPT大模型应用', link: '/docs/guide/chatgpt/'},
     { text: 'Python与自动化', link: '/docs/guide/python/'},
+    { text: 'GPT大模型应用', link: '/docs/guide/chatgpt/'},
     { text: 'DevOps流水线', link: '/docs/guide/devops/'},
     //{ text: '大数据与云计算', link: '/docs/guide/data/'},
     // 智能家居 无人机
