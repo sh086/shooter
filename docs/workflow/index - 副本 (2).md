@@ -7,7 +7,7 @@ aside: false
 
 
 
-## GPT副业
+## 图文
 
 <tr>
        <td><img src="https://img.88icon.com/download/jpg/201912/f30fce1adf899dcc0b488bff7138049a.jpg!ys" alt="热点数据分析" width="140"/>@抖音 | @ B站</td>
