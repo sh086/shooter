@@ -26,6 +26,28 @@ module.exports = {
       },
     ],
 
+    '/docs/guide/python/': [
+      {
+        text: 'Python',
+        collapsed: false,
+        items: [
+          { text: '入门', link: '/docs/guide/python/'},
+          { text: '快速开始', link: '/docs/guide/python/quickstart.md'},
+          { text: '面试宝典', link: '/docs/guide/python/interview.md'},
+        ]
+      },
+      {
+        text: '最佳实践',
+        collapsed: false,
+        items: [
+          { text: '爬虫与数据分析', link: '/docs/guide/python/crawler/'},
+          { text: '自动化办公', link: '/docs/guide/python/work/'},
+          { text: 'Web开发', link: '/docs/guide/python/web/'},
+          { text: '图形图形处理', link: '/docs/guide/python/media/'},
+        ]
+      },
+    ],
+
     '/docs/media/stable-diffusion/': [
       {
         text: 'Stable Diffusion',

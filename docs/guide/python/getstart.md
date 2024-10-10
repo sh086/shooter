@@ -205,6 +205,104 @@ print(f"begin={begin} end={end} even numbers:", data)
 
 
 
+
+
+# 课后练习 - 较难
+
+
+
+## 猜数字游戏
+
+```python
+input_number = input("请输入数字:")  # 定义变量number保存控制台输入的数字
+if 8 == int(input_number):
+    print("猜对了")  # 若正确的数字 等于 输入的数字 则打印：猜对了
+else:
+    print("猜错了")  # 若正确的数字 不等于 输入的数字 则打印：猜错了
+```
+
+
+
+
+
+## 分词
+
+### 简单的英文单词统计
+
+```python
+###
+# 统计英文文章中出现频率最多的单词
+# data文件内容如下：No fear of words, no fear of years
+###
+word_count = {}
+with open("./data.txt") as file:
+    for line in file:
+        line = line.replace("\n", "")  # 去除尾端的换行符\n
+        words = line.split()  # 根据空格分割
+        for word in words:
+            if word not in word_count:
+                word_count[word] = 0
+
+            word_count[word] += 1
+
+sort_result = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
+print(sort_result[:3])
+
+# 输出： [('fear', 2), ('of', 2), ('No', 1)]
+```
+
+
+
+### 统计四级高频单词
+
+```python
+import re
+import pandas as pd
+
+with open('./data.txt') as fin:
+    content = fin.read()
+
+words = re.split(r'[\s.()-?]+', content)
+
+print(pd.Series(words).value_counts()[:20])
+```
+
+
+
+### 中文小说分词统计
+
+```python
+import jieba
+import re
+
+content = """
+今天天气好晴朗,处处好风光
+会当凌绝顶,一览众山小
+"""
+content = re.sub(r"[\s。，、；]", "", content)
+word_list = jieba.cut(content)
+print(list(word_list))
+
+# 中文分词
+# ==========================
+content = "李玲和张鹏宇是朋友"
+import jieba.posseg as posseg
+
+for word, flag in posseg.cut(content):
+    print(word, flag)
+    # nr 人名 v 动词 n 名称
+    if flag == "nr":
+        print(word, flag)
+```
+
+
+
+## 简易计算器
+
+
+
+## 学生信息管理系统
+
 ## 数据类型
 
 ### 列表去重
