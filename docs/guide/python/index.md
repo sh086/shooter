@@ -2,104 +2,17 @@
 
 # Python与自动化
 
-
-
 > [官方文档](https://docs.python.org/zh-cn/3/tutorial/index.html) | [课后练习]() | [SSSS](https://pythonhowto.readthedocs.io/zh-cn/latest/install.html)
-
-
 
 ​	　Python是一种解释型、面向对象、动态数据类型的高级程序设计语言。
 
-​	　在Python中**所有的数据类型都是类**，**每个数据值都是类的实例**。在Python中有6种主要的内置数据类型：数字、字符串、列表、元组、集合和字典。可以使用`type()`来查询变量此时的类型。
-
 [Python思维导图]
-
-（1）Python推荐书单
-
-```
-- 看漫画学Python
-- Python编程：从入门到实践
-- Python高性能编程
-- 流畅的Python
-- 漫画算法：小灰的算法之旅（Python版）
-- Python网络数据采集
-```
-
-（2）Pycharm使用技巧
 
 
 
 ## 入门
 
 ### 从HelloWord开始
-
-
-
-### 简单的猜数游戏
-
-
-
-## 数据类型
-
-### 数字
-
-### 字符串
-
-### 列表
-
-### 元组
-
-### 集合
-
-### 字典
-
-## 更多的语法
-
-### 流程控制语句
-
-### 函数和装饰器
-
-### 错误和异常处理
-
-### 类与对象
-
-### 模块和包
-
-
-
-## 标准库
-
-### 输入输出
-
-### 时间与日期
-
-### 文件操作
-
-### 连接数据库
-
-### GUI图形页面
-
-### Socket通讯
-
-
-
-## 进阶
-
-### 生成器和迭代器
-
-### 内置模块
-
-### 外部函数接口
-
-### 并发实战
-
-### 调试和性能优化
-
-
-
-
-
-
 
 ​	　首先，我们在Python官网[下载Python安装包](https://www.python.org/downloads/)。在这个安装包里有Python解释器、Python运行所需要的基础库、以及交互式运行工具`Python Shell` 和 包管理工具 `pip` 等。
 
@@ -116,33 +29,15 @@ C:\Users\Administrator>pip3 --version
 pip 24.0 from D:\program\python3.11\Lib\site-packages\pip (python 3.11)
 ```
 
-​	　接着，下载并安装 [Pycharm Professional](https://www.jetbrains.com/pycharm/)，激活参考[这里](https://www.exception.site/essay/pycharm-pojie-jihuoma)。
+​	　接着，下载并安装 [Pycharm Professional](https://www.jetbrains.com/pycharm/)，激活参考[这里](https://www.exception.site/essay/pycharm-pojie-jihuoma)。新建一个工程
 
 ```python
 print("HelloWord")
 ```
-
-猜数字游戏
 
 ​	　在Pycharm中新建Python工程，并编写HelloWord程序，运行后若打印HelloWord字样，则表明全部安装成功。
 
-```python
-print("HelloWord")
-```
-
-
-
-## 附录
-
-
-
-
-
-数据类型
-
-​	　序列（sequence）是一种可迭代的、元素有序的容器类型的数据，包括列表（list）、字符串（str）、元组（tuple）和字节序列 （bytes）。
-
-标识符与关键字
+### 简单的猜数游戏
 
 ​	　Python代码是由关键字、标识符、表达式和语句等构成的，一行代码表示一条语句，在一般情况下**语句结束时不加分号**。
 
@@ -169,8 +64,6 @@ and not or in is as from global import
 del except nonlocal raise yield lambda assert
 ```
 
-
-
 （3）代码注释
 
 ```python
@@ -182,7 +75,11 @@ print("你好") # 尾行注释
 
 
 
-数字
+## 数据类型
+
+​	　在Python中**所有的数据类型都是类**，**每个数据值都是类的实例**。在Python中有6种主要的内置数据类型：数字、字符串、列表、元组、集合和字典。可以使用`type()`来查询变量此时的类型。序列（sequence）是一种可迭代的、元素有序的容器类型的数据，包括列表（list）、字符串（str）、元组（tuple）和字节序列 （bytes）。	　序列中的元素都是有序的，每一个元素都带有序号，这个序号叫作 索引。索引有正值索引和负值索引之分。可以通过下标运算符访问序列中的元素的
+
+### 数字
 
 ​	　Python中的数字类型有4种：整数类型、浮点类型、复数类型和布尔类型。注意，布尔类型也是一种整数类型。
 
@@ -330,11 +227,7 @@ str(6.3)     # 数字转为字符串、
 |                            =                             | 赋值运算符 | val = 8  # 声明并赋值val变量<br>a = b = c = 8  # 链式赋值 |
 | +=、-=、*=、、/=、%=、** =<br>//=、&=、\|=、^=、<<=、>>= | 复合运算符 | a += b 等价于 a = a + b                                   |
 
-
-
-字符串
-
-​	　序列中的元素都是有序的，每一个元素都带有序号，这个序号叫作 索引。索引有正值索引和负值索引之分。可以通过下标运算符访问序列中的元素的
+### 字符串
 
 （1）索引操作
 
@@ -363,25 +256,17 @@ len('hello') # 5，获取序列长度
 
 
 
-列表
+### 列表
 
+### 元组
 
+### 集合
 
-元组
+### 字典
 
+## 更多的语法
 
-
-集合
-
-
-
-字典
-
-
-
-程序结构
-
-流程控制语句
+### 流程控制语句
 
 （1）分支语句
 
@@ -456,17 +341,13 @@ for item in range(5):
 
 
 
-异常处理
+### 函数和装饰器
 
+### 错误和异常处理
 
+### 类与对象
 
-函数与模块
-
-作用域
-
-（1）递归
-
-
+### 模块和包
 
 ​	　在Python中一个模块就是一个文件，模块是保存代码的最小单位， 在模块中可以声明变量、函数、属性和类等Python代码元素。
 
@@ -480,4 +361,47 @@ from ＜模块名＞ import ＜元素＞ [as ＜别名＞]
 
 
 
-类与对象
+## 标准库
+
+### 输入输出
+
+### 时间与日期
+
+### 文件操作
+
+### 连接数据库
+
+### GUI图形页面
+
+### Socket通讯
+
+
+
+## 进阶
+
+### 生成器和迭代器
+
+### 内置模块
+
+### 外部函数接口
+
+### 并发实战
+
+### 调试和性能优化
+
+
+
+## 附录
+
+（1）Python推荐书单
+
+```
+- 看漫画学Python
+- Python编程：从入门到实践
+- Python高性能编程
+- 流畅的Python
+- 漫画算法：小灰的算法之旅（Python版）
+- Python网络数据采集
+```
+
+
