@@ -26,24 +26,26 @@ module.exports = {
       },
     ],
 
-    '/docs/guide/python/': [
+    '/docs/develop/python/': [
       {
         text: 'Python',
         collapsed: false,
         items: [
-          { text: '教程', link: '/docs/guide/python/'},
-          { text: '快速开始', link: '/docs/guide/python/quickstart.md'},
-          { text: '面试宝典', link: '/docs/guide/python/interview.md'},
+          { text: '简介', link: '/docs/develop/python/'},
+          { text: '快速开始', link: '/docs/develop/python/quickstart.md'},
+          { text: '更多的语法', link: '/docs/develop/python/grammer.md'},
+          { text: '面试宝典', link: '/docs/develop/python/interview.md'},
         ]
       },
       {
         text: '最佳实践',
         collapsed: false,
         items: [
-          { text: '爬虫与数据分析', link: '/docs/guide/python/crawler/'},
-          { text: '自动化办公', link: '/docs/guide/python/work/'},
-          { text: 'Web开发', link: '/docs/guide/python/web/'},
-          { text: '图形图形处理', link: '/docs/guide/python/media/'},
+          { text: '网络爬虫', link: '/docs/develop/python/crawler/'},
+          { text: '数据分析', link: '/docs/develop/python/analysis/'},
+          { text: '自动化办公', link: '/docs/develop/python/work/'},
+          { text: 'Web开发', link: '/docs/develop/python/web/'},
+          { text: '第三方工具', link: '/docs/develop/python/tools/'},
         ]
       },
     ],
