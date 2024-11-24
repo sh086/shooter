@@ -2,7 +2,7 @@
 
 # Python
 
-> [官方文档](https://docs.python.org/zh-cn/3/tutorial/index.html) | [SSSS](https://pythonhowto.readthedocs.io/zh-cn/latest/install.html)
+> [官方文档](https://docs.python.org/zh-cn/3/tutorial/index.html) 
 
 ## 简介
 
@@ -36,11 +36,11 @@
                     width="100" alt="Python编程：从入门到实践"/> 
        </td>
        <td  style=" border: 1px transparent;padding-right: 5px;">
-              <img src="https://i-blog.csdnimg.cn/blog_migrate/c77a53df8759dc423828ffdea9a41a77.png"  
+              <img src="https://cdn.ptpress.cn/pubcloud/bookImg/null/202112151EF18525.jpg"  
                     width="100" alt="Python编程快速上手-让繁琐的工程自动化"/> 
        </td>
        <td  style=" border: 1px transparent;padding-right: 5px;">
-              <img src="https://img3.doubanio.com/view/subject/l/public/s34894002.jpg" 
+              <img src="https://cdn.weread.qq.com/weread/cover/26/cpplatform_rknsdew6awcblqwdnmxkiq/t8_cpplatform_rknsdew6awcblqwdnmxkiq1722240746.jpg" 
                     width="100" alt="Python极客项目编程"/> 
        </td>
        <td  style=" border: 1px transparent;padding-right: 5px;">
